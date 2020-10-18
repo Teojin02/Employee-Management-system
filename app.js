@@ -3,7 +3,7 @@ let inquirer = require("inquirer");
 
 let connection = mysql.createConnection({
     host: "localhost",
-    port: 8000,
+    port: 3306,
     user: "root",
     password: "",
     database: "employeed_db"
@@ -248,7 +248,7 @@ function update(){
 function deleteHere(){
     let getE = [
         {type: "input",
-         message: "Enter the Employee ID you wish to delete",
+         message: "enter the Employee ID you want to delete",
          name: "empID",
             validate: function (value) {
                 let valid = !isNaN(parseFloat(value));
@@ -257,8 +257,7 @@ function deleteHere(){
             }
         },
     ];
-
-    inquirer.prompt(getE).then(function (name) {
+        inquirer.prompt(getE).then(function (name) {
         connection.query("Delete employee where id = ?", name.empID, function(err, result){
             if(err){console.log("Could not find ID or another issue exists.")};
             console.log("deleted employee with ID of" + name.empID);
